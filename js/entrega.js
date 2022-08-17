@@ -2,8 +2,8 @@ const IVA = 0.22;
 
 let usuarioEnLinea;
 
-clientes[0] = new Persona("Luciano", "Collazzi", "Frugoni 732", 33638878, "desafio5");
-clientes.push(new Persona("Kiki", "Malone", "Jose P. Varela 371", 12345678, "hermano"));
+clientes[0] = new Persona("Gabriel", "Guigou", "Piedra Alta 614", 40215548, "desafio");
+clientes.push(new Persona("Dario", "Guigou", "Paul harris 54", 12345678, "padre"));
 
 function hayUsuario(nroDocumento){
     let usuario = clientes.find(clienteEsta=> clienteEsta.documento==nroDocumento);
