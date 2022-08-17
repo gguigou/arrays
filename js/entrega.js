@@ -1,24 +1,9 @@
 const IVA = 0.22;
 
-class Persona {
-    constructor(nombre, apellido, direccion, documento, contrasenia){
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.direccion = direccion;
-        this.documento = documento;
-        this.contrasenia = contrasenia;
-    }
-    descripcion(){
-        alert("Nombre: " + this.nombre + " Apellido: " + this.apellido + " Direccion: " + this.direccion);
-    }
-}
-
 let usuarioEnLinea;
 
-const clientes = [];
-
-clientes[0] = new Persona("Gabriel", "Guigou", "Piedra Alta 614", 40215548, "desafio");
-clientes.push(new Persona("Dario", "Guigou", "Paul Harris 56", 12345678, "padre"));
+clientes[0] = new Persona("Luciano", "Collazzi", "Frugoni 732", 33638878, "desafio5");
+clientes.push(new Persona("Kiki", "Malone", "Jose P. Varela 371", 12345678, "hermano"));
 
 function hayUsuario(nroDocumento){
     let usuario = clientes.find(clienteEsta=> clienteEsta.documento==nroDocumento);
@@ -56,39 +41,13 @@ function registrarUsuario(nombre,apellido,direccion,documento,contrasenia){
 }
 
 
-class Producto {
-    constructor(codigo, descripcion, valor, talle){
-        this.codigo=codigo;
-        this.descripcion=descripcion;
-        this.valor=valor;
-        this.talle=talle;
-    }
-    // constructor(objeto){
-    //     this.codigo= objeto.codigo;
-    //     this.descripcion=objeto.descripcion;
-    //     this.valor=objeto.valor;
-    //     this.talle=objeto.talle;
-    // }
-    valorSinIva = () => (this.valor/(1+IVA));
-    ivaDelValorFinal = function() { return (this.valor - (this.valor/(1+IVA)))}
-    describir() {
-        alert(this.descripcion + " " + this.talle + " " + this.valor);
-    }
-}
-
-const stock = [new Producto(1, "Jumper", 1000, "XS" ),
-                new Producto(2, "Pollera", 700, "XS" ),
-                new Producto(3, "Remera", 950, "XS" )];
-stock.push(new Producto(4,"Short", 550, "L"));
-const carrito =[];
-
 const guardarCarrito = (clave,carritoAGuardar) => {localStorage.setItem(clave,JSON.stringify(carritoAGuardar))}
 
 const carritoGuardado = JSON.parse(localStorage.getItem("compra"));
 console.log(carritoGuardado);
 if(carritoGuardado!=null){
     for (let i=0 ; i < carritoGuardado.length ; i++) {
-        carrito[i] = new Producto(carritoGuardado[i].codigo,carritoGuardado[i].descripcion,carritoGuardado[i].valor,carritoGuardado[i].talle);
+        carrito[i] = new Producto(carritoGuardado[i].codigo,carritoGuardado[i].descripcion,carritoGuardado[i].valor,carritoGuardado[i].talle), carritoGuardado[i].imagen;
     }
 }
 
@@ -97,7 +56,7 @@ function vender(productoCliente){
     // let productoCliente = prompt("Ingrese el codigo del producto:(1-4), ESC para salir");
     if(encontrado = stock.find(productoStock=> productoStock.codigo == parseInt(productoCliente))){
         encontrado.describir();
-        alert("Valor del IVA: "+ encontrado.ivaDelValorFinal()+ " valor sin IVA: "+ encontrado.valorSinIva());
+        // alert("Valor del IVA: "+ encontrado.ivaDelValorFinal()+ " valor sin IVA: "+ encontrado.valorSinIva());
         carrito.push(encontrado);
     }
     else
@@ -190,15 +149,15 @@ function validarIngreso(e){
 
 //Escuchar botones de cada productos
 
-let botones = document.getElementsByClassName("botonAgregar");
-for (const boton of botones) {
-    boton.addEventListener("click",respuestaClick);
-}
-function respuestaClick(e){
-    let botonClick = e.target;
-    vender(botonClick.value);
-    guardarCarrito("compra",carrito);
-}
+// let botones = document.getElementsByClassName("botonAgregar");
+// for (const boton of botones) {
+//     boton.addEventListener("click",respuestaClick);
+// }
+// function respuestaClick(e){
+//     let botonClick = e.target;
+//     vender(botonClick.value);
+//     guardarCarrito("compra",carrito);
+// }
 let botonFinalizar = document.getElementById("botonFinalizar");
 botonFinalizar.addEventListener("click",finalizarCarrito);
 function finalizarCarrito(){
